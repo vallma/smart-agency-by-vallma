@@ -335,7 +335,7 @@ export function ActionLogPanel() {
     const handleDownloadAll = () => {
         const content = debugLog.map(entry => {
             const agent = entry.agentIndex === -1
-                : { name: 'Sistema' }
+                ? { name: 'Sistema' }
                 : agents.find(a => a.index === entry.agentIndex);
             return `
 =========================================

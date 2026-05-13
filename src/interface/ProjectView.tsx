@@ -152,7 +152,7 @@ const ProjectView: React.FC = () => {
               const agentIndex = parseInt(idx);
               const agents = getAllAgents(activeTeam);
               const agent = agentIndex === -1
-                : { name: 'Sistema', color: '#71717a' }
+                ? { name: 'Sistema', color: '#71717a' }
                 : agents.find(a => a.index === agentIndex);
 
               if (!agent || usage.totalTokens === 0) return null;

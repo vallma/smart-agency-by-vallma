@@ -36,10 +36,20 @@ export const useUiStore = create<CharacterState>()(
     llmConfig: (() => {
       try {
         const saved = localStorage.getItem('byok-config');
-        if (saved) return JSON.parse(saved);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          // Backwards compat: migrate old { apiKey, model } to { apiKeys, model }
+          if (parsed.apiKey !== undefined && parsed.apiKeys === undefined) {
+            return {
+              apiKeys: { gemini: parsed.apiKey },
+              model: parsed.model || DEFAULT_MODELS.text,
+            };
+          }
+          return parsed;
+        }
       } catch { }
       return {
-        apiKey: '',
+        apiKeys: {},
         model: DEFAULT_MODELS.text
       };
     })(),

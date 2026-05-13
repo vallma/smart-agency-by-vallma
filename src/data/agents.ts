@@ -13,6 +13,7 @@ export interface AgentNode {
   description: string;
   color: string;
   model: string;
+  provider?: string;
   humanInTheLoop?: boolean;
   position?: { x: number; y: number };
   subagents?: AgentNode[];

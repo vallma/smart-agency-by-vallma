@@ -32,6 +32,7 @@ export interface LLMToolDefinition {
 
 export interface LLMConfig {
   apiKey?: string;
+  apiKeys?: Record<string, string>;
   baseUrl?: string;
   model: string;
 }

@@ -1,5 +1,7 @@
 import { LLMMessage } from '../llm/types';
 import { GeminiProvider } from '../llm/providers/GeminiProvider';
+import { createProvider } from '../llm/providers/ProviderFactory';
+import { ProviderName } from '../llm/constants';
 import { useUiStore } from '../../integration/store/uiStore';
 import { useCoreStore } from '../../integration/store/coreStore';
 import { useTeamStore } from '../../integration/store/teamStore';
@@ -38,8 +40,10 @@ export class AgentBrain {
       this.refreshFromStore();
       const core = useCoreStore.getState();
       const llmConfig = useUiStore.getState().llmConfig;
-      if (!llmConfig.apiKey) throw new Error('Gemini API key is required');
-      const provider = new GeminiProvider(llmConfig.apiKey);
+      const agentProvider = (this.host.data.provider || 'gemini') as ProviderName;
+      const apiKey = llmConfig.apiKeys?.[agentProvider] || '';
+      if (!apiKey) throw new Error(`API key for ${agentProvider} is required`);
+      const provider = createProvider(agentProvider, apiKey);
       const model = this.host.data.model || llmConfig.model;
       const teamId = useTeamStore.getState().selectedAgentSetId;
       const activeTeam = useTeamStore.getState().customSystems.find(s => s.id === teamId)
@@ -235,8 +239,9 @@ export class AgentBrain {
 
     try {
       const llmConfig = useUiStore.getState().llmConfig;
-      if (!llmConfig.apiKey) throw new Error('Gemini API key is required');
-      const provider = new GeminiProvider(llmConfig.apiKey) as any;
+      const geminiKey = llmConfig.apiKeys?.gemini || '';
+      if (!geminiKey) throw new Error('Gemini API key is required for asset generation');
+      const provider = new GeminiProvider(geminiKey) as any;
       const model = options.model || activeTeam.outputModel || llmConfig.model;
 
       core.addLogEntry({

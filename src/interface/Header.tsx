@@ -1,12 +1,9 @@
-import { Info, KeyRound, Maximize2, Settings } from 'lucide-react';
+import { KeyRound, Maximize2, Settings } from 'lucide-react';
 import React, { useState } from 'react';
-import packageJson from '../../package.json';
 import { useCoreStore } from '../integration/store/coreStore';
 import { useUiStore } from '../integration/store/uiStore';
 import BYOKModal from './BYOKModal';
 import InfoModal from './InfoModal';
-
-const version = packageJson.version;
 
 const Header: React.FC = () => {
   const { llmConfig, isBYOKOpen, setBYOKOpen } = useUiStore();
@@ -26,27 +23,8 @@ const Header: React.FC = () => {
 
   return (
     <header className="h-14 border-b border-zinc-100 flex items-center justify-between px-6 bg-white shrink-0 relative z-40">
-      {/* Left: Project Title */}
-      <div className="flex items-center min-w-0">
-        <img
-          src="images/the-delegation.svg"
-          alt="Smart Agency by Vallma"
-          className="h-10 w-auto shrink-0"
-        />
-
-        <div className="flex items-center gap-3 self-start mt-3 ml-2 min-w-0">
-          <div className="flex items-center gap-1 shrink-0">
-            <button
-              onClick={() => setIsInfoOpen(true)}
-              className="text-zinc-300 hover:text-zinc-500 transition-colors cursor-pointer"
-            >
-              <Info size={14} strokeWidth={2} />
-            </button>
-            <span className="text-[10px] font-medium text-zinc-400 font-mono">v{version}</span>
-          </div>
-
-        </div>
-      </div>
+      {/* Left: empty */}
+      <div />
 
       {/* Right: Global Controls */}
       <div className="flex items-center gap-3">

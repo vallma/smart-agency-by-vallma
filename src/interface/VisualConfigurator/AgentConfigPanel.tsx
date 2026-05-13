@@ -8,6 +8,7 @@ import { Avatar } from '../components/Avatar';
 import { ColorPicker } from './ColorPicker';
 import { InfoBubble } from '../components/InfoBubble';
 import { getBrightness, MAX_BRIGHTNESS } from './colorUtils';
+import { PROVIDERS, PROVIDER_LABELS, PROVIDER_MODELS, ProviderName } from '../../core/llm/constants';
 
 interface AgentConfigPanelProps {
   agent: AgentNode;
@@ -181,18 +182,38 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
               ), 'Limita los caracteres a letras, números y espacios. El ID se genera automáticamente.')}
 
               {renderField('LLM Model', <Cpu size={12} />, isView ? (
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 border border-zinc-200 rounded-lg text-xs font-mono text-zinc-600 w-fit lowercase">
-                  {editData.model || 'gemini-3-flash-preview'}
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 border border-zinc-200 rounded-lg text-xs font-mono text-zinc-600 w-fit lowercase">
+                    {editData.provider || 'gemini'}
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 border border-zinc-200 rounded-lg text-xs font-mono text-zinc-600 w-fit lowercase">
+                    {editData.model || 'gemini-3-flash-preview'}
+                  </div>
                 </div>
               ) : (
-                <select
-                  value={editData.model || 'gemini-3-flash-preview'}
-                  onChange={(e) => updateDraft({ model: e.target.value })}
-                  className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-black/5 cursor-pointer lowercase"
-                >
-                  {availableModels.map(m => <option key={m} value={m} className="lowercase">{m}</option>)}
-                </select>
-              ), 'El modelo Gemini específico que usará este agente.')}
+                <div className="space-y-2">
+                  <select
+                    value={editData.provider || 'gemini'}
+                    onChange={(e) => {
+                      const newProvider = e.target.value as ProviderName;
+                      const firstModel = PROVIDER_MODELS[newProvider][0];
+                      updateDraft({ provider: newProvider, model: firstModel });
+                    }}
+                    className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-black/5 cursor-pointer"
+                  >
+                    {PROVIDERS.map(p => <option key={p} value={p}>{PROVIDER_LABELS[p]}</option>)}
+                  </select>
+                  <select
+                    value={editData.model || 'gemini-3-flash-preview'}
+                    onChange={(e) => updateDraft({ model: e.target.value })}
+                    className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-black/5 cursor-pointer lowercase"
+                  >
+                    {PROVIDER_MODELS[editData.provider as ProviderName || 'gemini'].map(m => (
+                      <option key={m} value={m} className="lowercase">{m}</option>
+                    ))}
+                  </select>
+                </div>
+              ), 'El proveedor y modelo que usará este agente.')}
             </div>
 
             {/* Content Group */}
