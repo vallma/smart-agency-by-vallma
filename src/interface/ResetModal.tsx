@@ -26,7 +26,7 @@ const ResetModal: React.FC<ResetModalProps> = ({ isOpen, onClose, onConfirm }) =
                 <AlertTriangle size={32} strokeWidth={2.5} />
               </div>
               <h3 className="text-2xl font-black text-darkDelegation leading-tight">
-                Start New Project?
+                ¿Iniciar nuevo proyecto?
               </h3>
             </div>
             <button
@@ -38,8 +38,8 @@ const ResetModal: React.FC<ResetModalProps> = ({ isOpen, onClose, onConfirm }) =
           </div>
 
           <p className="text-sm text-zinc-500 leading-relaxed mb-8">
-            This will clear the current user brief, all tasks, logs, and conversation histories.
-            The team will return to their starting positions and the project will revert to idle.
+            Esto borrará el brief del usuario actual, todas las tareas, registros e historiales de conversación.
+            El equipo volverá a sus posiciones iniciales y el proyecto volverá al estado inactivo.
           </p>
 
           <div className="flex flex-col gap-3">
@@ -51,13 +51,13 @@ const ResetModal: React.FC<ResetModalProps> = ({ isOpen, onClose, onConfirm }) =
               className="w-full py-4 bg-darkDelegation hover:bg-darkDelegation text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2"
             >
               <RefreshCcw size={14} />
-              Yes, Reset Everything
+              Sí, reiniciar todo
             </button>
             <button
               onClick={onClose}
               className="w-full py-4 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-2xl font-black text-xs uppercase tracking-widest transition-all active:scale-[0.98]"
             >
-              Cancel
+              Cancelar
             </button>
           </div>
         </div>

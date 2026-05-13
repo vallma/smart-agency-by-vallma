@@ -32,7 +32,7 @@ const AgentStatusPanel: React.FC<AgentStatusPanelProps> = ({ agentIndex }) => {
         {agent.index !== 0 && (
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Description</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Descripción</p>
               <div className="h-px flex-1 bg-zinc-100" />
             </div>
             <p className="text-xs text-zinc-600 leading-relaxed font-medium capitalize-first">{agent.description}</p>
@@ -41,7 +41,7 @@ const AgentStatusPanel: React.FC<AgentStatusPanelProps> = ({ agentIndex }) => {
         {/* Model */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Model</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Modelo</p>
             <div className="h-px flex-1 bg-zinc-100" />
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-zinc-50 rounded-lg border border-zinc-100/60 font-mono">
@@ -53,13 +53,13 @@ const AgentStatusPanel: React.FC<AgentStatusPanelProps> = ({ agentIndex }) => {
         {/* Token Usage */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Token Usage</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Uso de tokens</p>
             <div className="h-px flex-1 bg-zinc-100" />
           </div>
           <div className="flex items-center gap-1.5 text-[11px] font-bold font-mono">
-            <span className="text-zinc-700">{formatTokens(usage.promptTokens)} <span className="text-zinc-400 font-medium">input</span></span>
+            <span className="text-zinc-700">{formatTokens(usage.promptTokens)} <span className="text-zinc-400 font-medium">entrada</span></span>
             <span className="text-zinc-300">+</span>
-            <span className="text-zinc-700">{formatTokens(usage.completionTokens)} <span className="text-zinc-400 font-medium">output</span></span>
+            <span className="text-zinc-700">{formatTokens(usage.completionTokens)} <span className="text-zinc-400 font-medium">salida</span></span>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@ const AgentStatusPanel: React.FC<AgentStatusPanelProps> = ({ agentIndex }) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: agent.color }}></span>
               <span className="relative inline-flex rounded-full h-2 w-2" style={{ backgroundColor: agent.color }}></span>
             </span>
-            Doing Now
+            Haciendo ahora
           </p>
           <p className="text-sm text-darkDelegation leading-snug font-bold">
             "{activeTask.title}"
@@ -83,10 +83,10 @@ const AgentStatusPanel: React.FC<AgentStatusPanelProps> = ({ agentIndex }) => {
       ) : (
         <div className="mb-6">
           <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400/50 mb-2">
-            Status
+            Estado
           </p>
           <p className="text-sm text-zinc-300 leading-snug italic font-medium">
-            Waiting for next task...
+            Esperando la siguiente tarea...
           </p>
         </div>
       )}

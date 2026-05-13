@@ -58,22 +58,22 @@ function getAgentPhaseLabel(
   fallback: string,
 ): PhaseLabel {
   if (isGeneratingAsset && agentIndex === leadAgentIndex) {
-    return { text: 'Delivering...', className: 'text-indigo-400 animate-pulse' };
+    return { text: 'Entregando...', className: 'text-indigo-400 animate-pulse' };
   }
   if (agentIndex === leadAgentIndex && phase === 'done') {
-    return { text: 'Project Ready!', className: 'text-yellow-400' };
+    return { text: '¡Proyecto listo!', className: 'text-yellow-400' };
   }
   const holdTask = tasks.find(
     t => t.assignedAgentId === agentIndex && t.status === 'on_hold',
   );
   if (holdTask && phase !== 'done') {
-    return { text: 'Approval Needed', className: 'text-[#7EACEA]' };
+    return { text: 'Aprobación necesaria', className: 'text-[#7EACEA]' };
   }
   const activeTask = tasks.find(
     t => t.assignedAgentId === agentIndex && t.status === 'in_progress',
   );
   if (activeTask) {
-    return { text: 'Working', className: 'text-emerald-400' };
+    return { text: 'Trabajando', className: 'text-emerald-400' };
   }
   return { text: fallback, className: 'text-white/70' };
 }
@@ -181,7 +181,7 @@ const UIOverlay: React.FC = () => {
                 <div className="flex items-center gap-1.5">
                   {selectedAgent.index === system.user.index ? (
 
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white">{selectedAgent.name} (You)</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white">{selectedAgent.name} (Tú)</span>
                   ) : isLeadAgentProjectReady ? (
                     <span className={`text-[10px] font-black uppercase tracking-widest ${label.className}`}>
                       {label.text}
@@ -229,7 +229,7 @@ const UIOverlay: React.FC = () => {
                 <div className="flex items-center gap-1.5">
                   {hoveredAgent.index === system.user.index ? (
 
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white">{hoveredAgent.name} (You)</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white">{hoveredAgent.name} (Tú)</span>
                   ) : isLeadAgentProjectReady ? (
                     <span className={`text-[10px] font-black uppercase tracking-widest ${label.className}`}>
                       {label.text}

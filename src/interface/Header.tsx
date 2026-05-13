@@ -54,10 +54,10 @@ const Header: React.FC = () => {
         <button
           onClick={() => setViewMode('design')}
           className="flex items-center gap-2 px-3 py-1 bg-darkDelegation hover:bg-darkDelegation text-white rounded-lg transition-all shadow-lg shadow-black/10 active:scale-95 cursor-pointer h-9 shrink-0 ml-1"
-          title="Manage Teams"
+          title="Gestionar equipos"
         >
           <Settings size={14} className="group-hover:rotate-45 transition-transform" />
-          <span className="text-[10px] font-black uppercase tracking-wider ml-1 hidden sm:inline">Manage Teams</span>
+          <span className="text-[10px] font-black uppercase tracking-wider ml-1 hidden sm:inline">Gestionar equipos</span>
         </button>
 
         <div className="w-px h-4 bg-zinc-200" />
@@ -66,14 +66,14 @@ const Header: React.FC = () => {
           <button
             onClick={handleFullscreen}
             className="text-zinc-400 hover:text-darkDelegation transition-colors p-1"
-            title="Fullscreen Browser"
+            title="Pantalla completa"
           >
             <Maximize2 size={16} />
           </button>
           <button
             onClick={() => setBYOKOpen(true)}
             className="relative text-zinc-400 hover:text-darkDelegation transition-colors p-1"
-            title="API Key (BYOK)"
+            title="Clave API (BYOK)"
           >
             <KeyRound size={16} className={hasKey ? 'text-emerald-500 hover:text-emerald-600' : ''} />
             {hasKey && (

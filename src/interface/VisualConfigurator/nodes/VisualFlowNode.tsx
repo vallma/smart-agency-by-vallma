@@ -69,7 +69,7 @@ export const VisualFlowNode = ({ data, selected, type }: any) => {
                     borderColor: `${data.color}40`
                   }}
                 >
-                  Lead Agent
+                  Agente principal
                 </div>
               )}
 
@@ -82,7 +82,7 @@ export const VisualFlowNode = ({ data, selected, type }: any) => {
                     borderColor: `${data.color}40`
                   }}
                 >
-                  Subagent
+                  Subagente
                 </div>
               )}
 

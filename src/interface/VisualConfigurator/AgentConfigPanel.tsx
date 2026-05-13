@@ -119,7 +119,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
             <Avatar type={isLead ? 'lead' : 'sub'} color={editData.color} size={32} />
           )}
           <h3 className="font-bold text-sm text-darkDelegation uppercase tracking-tight truncate">
-            {isUser ? 'User Info' : (isLead ? 'Lead Agent Info' : 'Subagent Info')}
+            {isUser ? 'Info de usuario' : (isLead ? 'Info del agente principal' : 'Info del subagente')}
           </h3>
         </div>
         <button onClick={() => onClose(false)} className="p-1 hover:bg-zinc-200 rounded-md transition-colors text-zinc-400">
@@ -140,8 +140,8 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
               <Avatar type="user" color={USER_COLOR} size={64} />
             </div>
             <div>
-              <h4 className="text-sm font-black text-darkDelegation uppercase tracking-widest mb-1">Primary User</h4>
-              <p className="text-[11px] text-zinc-500 font-medium leading-relaxed">This is you. Your identity and role are fixed across all teams for consistency.</p>
+              <h4 className="text-sm font-black text-darkDelegation uppercase tracking-widest mb-1">Usuario principal</h4>
+              <p className="text-[11px] text-zinc-500 font-medium leading-relaxed">Eres tú. Tu identidad y rol son fijos en todos los equipos por coherencia.</p>
             </div>
           </div>
         ) : (
@@ -152,7 +152,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                 <div className="space-y-1.5 px-1">
                   <div className="flex items-center gap-1.5">
                     <Pipette size={12} className="text-zinc-400" />
-                    <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Agent Color</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Color del agente</label>
                   </div>
                   <ColorPicker
                     color={editData.color}
@@ -174,11 +174,11 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                   />
                   {nameCollision && (
                     <p className="text-[9px] text-red-500 font-bold uppercase tracking-tight px-1">
-                      This name is already used in the team
+                      Este nombre ya está en uso en el equipo
                     </p>
                   )}
                 </div>
-              ), 'Limit characters to letters, numbers and spaces. The ID is auto-generated.')}
+              ), 'Limita los caracteres a letras, números y espacios. El ID se genera automáticamente.')}
 
               {renderField('LLM Model', <Cpu size={12} />, isView ? (
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100 border border-zinc-200 rounded-lg text-xs font-mono text-zinc-600 w-fit lowercase">
@@ -192,7 +192,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                 >
                   {availableModels.map(m => <option key={m} value={m} className="lowercase">{m}</option>)}
                 </select>
-              ), 'The specific Gemini model this agent will use.')}
+              ), 'El modelo Gemini específico que usará este agente.')}
             </div>
 
             {/* Content Group */}
@@ -200,7 +200,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
               {renderField('Description', <Target size={12} />, isView ? (
                 <div className="bg-zinc-50/50 p-4 rounded-xl border border-zinc-100/50 min-h-[120px]">
                   <p className="text-xs text-zinc-600 leading-relaxed whitespace-pre-wrap font-medium italic">
-                    {editData.description || "No description provided."}
+                    {editData.description || "Sin descripción."}
                   </p>
                 </div>
               ) : (
@@ -208,9 +208,9 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                   value={editData.description}
                   onChange={(e) => updateDraft({ description: e.target.value })}
                   className="w-full h-48 px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-xl text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-black/5 resize-none font-medium text-zinc-600"
-                  placeholder="What is this agent specialized in? What are its primary goals and constraints?"
+                  placeholder="¿En qué se especializa este agente? ¿Cuáles son sus objetivos principales y restricciones?"
                 />
-              ), 'A concise yet comprehensive definition of the agent\'s role, expertise, and operational guidelines.')}
+              ), 'Una definición concisa pero completa del rol del agente, su experiencia y sus directrices operativas.')}
             </div>
 
 
@@ -223,7 +223,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                       <div className="w-4 h-4 rounded-full bg-zinc-200 flex items-center justify-center shrink-0">
                         <Check size={10} className="text-zinc-700" />
                       </div>
-                      <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Set Project Brief</span>
+                      <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Establecer brief del proyecto</span>
                     </div>
                   )}
                   {(editData.subagents?.length || 0) > 0 && (
@@ -231,31 +231,31 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                       <div className="w-4 h-4 rounded-full bg-zinc-200 flex items-center justify-center shrink-0">
                         <Check size={10} className="text-zinc-700" />
                       </div>
-                      <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Propose Tasks</span>
+                      <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Proponer tareas</span>
                     </div>
                   )}
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 rounded-full bg-zinc-200 flex items-center justify-center shrink-0">
                       <Check size={10} className="text-zinc-700" />
                     </div>
-                    <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Execute & Complete Tasks</span>
+                    <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Ejecutar y completar tareas</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 rounded-full bg-zinc-200 flex items-center justify-center shrink-0">
                       <Check size={10} className="text-zinc-700" />
                     </div>
-                    <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Autonomous Reasoning</span>
+                    <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Razonamiento autónomo</span>
                   </div>
                   {isLead && (
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 rounded-full bg-zinc-200 flex items-center justify-center shrink-0">
                         <Check size={10} className="text-zinc-700" />
                       </div>
-                      <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Deliver Project</span>
+                      <span className="text-[10px] font-black text-zinc-700 uppercase tracking-tight">Entregar proyecto</span>
                     </div>
                   )}
                 </div>
-              ), "Tools are automatically assigned based on the agent's role and team hierarchy.")}
+              ), "Las herramientas se asignan automáticamente según el rol del agente y la jerarquía del equipo.")}
 
               {renderField('Supervision', <User size={12} />, (
                 <div
@@ -280,7 +280,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                       Human-in-the-loop
                     </span>
                     <span className="text-[9px] text-zinc-500 font-medium leading-tight max-w-[160px]">
-                      Agent must request your validation before completing any task.
+                      El agente debe solicitar tu validación antes de completar cualquier tarea.
                     </span>
                   </div>
                   <div className={`
@@ -295,7 +295,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
                       `} />
                   </div>
                 </div>
-              ), "When enabled, the agent will pause their work to submit the result for your review and feedback before finalizing.")}
+              ), "Cuando está activado, el agente pausará su trabajo para enviar el resultado para tu revisión y comentarios antes de finalizar.")}
             </div>
           </>
         )}
@@ -310,7 +310,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
             className={`w-full py-3 bg-darkDelegation hover:bg-black text-white rounded-2xl text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-lg shadow-black/5 active:scale-95 ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <Save size={16} strokeWidth={2.5} />
-            Update Agent
+            Actualizar agente
           </button>
           {onRemove && (
             <button
@@ -318,7 +318,7 @@ export const AgentConfigPanel: React.FC<AgentConfigPanelProps> = ({
               className="w-full py-2.5 text-red-500 hover:bg-red-50 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all"
             >
               <Trash2 size={14} />
-              Remove from Team
+              Eliminar del equipo
             </button>
           )}
         </div>

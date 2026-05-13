@@ -17,14 +17,14 @@ export function useChatAvailability(agentIndex: number | null): ChatAvailability
   const system = useActiveTeam()
 
   if (agentIndex === null) return { canChat: false, reason: '' }
-  if (isGeneratingAsset) return { canChat: false, reason: 'Delivering...' }
-  if (phase === 'done') return { canChat: false, reason: 'Project completed' }
+  if (isGeneratingAsset) return { canChat: false, reason: 'Entregando...' }
+  if (phase === 'done') return { canChat: false, reason: 'Proyecto completado' }
 
   const isLead = agentIndex === system.leadAgent.index
 
   // 1. Idle Phase: Only Lead Agent can chat (to set the brief)
   if (phase === 'idle') {
-    return isLead ? { canChat: true, reason: '' } : { canChat: false, reason: 'Waiting for brief' }
+    return isLead ? { canChat: true, reason: '' } : { canChat: false, reason: 'Esperando brief' }
   }
 
   // 2. Working Phase: Lead Agent can always talk. Others only when idle.
@@ -33,11 +33,11 @@ export function useChatAvailability(agentIndex: number | null): ChatAvailability
   }
 
   // Provide specific reason for busy agents
-  if (agentStatus === 'on_hold') return { canChat: false, reason: 'Review requested...' }
+  if (agentStatus === 'on_hold') return { canChat: false, reason: 'Revisión solicitada...' }
 
   const activeTask = tasks.find((t) => t.assignedAgentId === agentIndex && t.status === 'in_progress')
   return { 
     canChat: false, 
-    reason: activeTask ? `Working on: "${activeTask.title}"` : 'Agent is busy' 
+    reason: activeTask ? `Trabajando en: "${activeTask.title}"` : 'Agente ocupado'
   }
 }

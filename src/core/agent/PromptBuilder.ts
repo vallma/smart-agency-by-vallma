@@ -13,9 +13,9 @@ export class PromptBuilder {
       .join(', ');
 
     const objectives = {
-      idle: isLead ? 'Chat with [0] to define brief, then set_user_brief.' : 'Wait for Lead to start.',
-      working: isLead ? 'Manage board. deliver_project when all Done.' : 'Complete tasks.',
-      done: 'Project finished.'
+      idle: isLead ? 'Habla con [0] para definir el brief, luego set_user_brief.' : 'Espera a que el Lead empiece.',
+      working: isLead ? 'Gestiona el tablero. deliver_project cuando todo esté Hecho.' : 'Completa las tareas.',
+      done: 'Proyecto finalizado.'
     };
 
     const tasks = useCoreStore.getState().tasks;
@@ -24,7 +24,7 @@ export class PromptBuilder {
           const agentName = allAgents.find((a: any) => a.data.index === t.assignedAgentId)?.data?.name || `Agent ${t.assignedAgentId}`;
           
           const feedbackStr = t.reviewComments 
-            ? `\n   >> USER FEEDBACK / REVISION REQUESTED: "${t.reviewComments}"` 
+            ? `\n   >> FEEDBACK DEL USUARIO / REVISIÓN SOLICITADA: "${t.reviewComments}"`
             : '';
             
           const outputStr = (t.status === 'done' && t.output)
@@ -33,7 +33,7 @@ export class PromptBuilder {
 
           return `* [${t.status.toUpperCase()}] ${t.title} (Owner: ${agentName})${feedbackStr}${outputStr}`;
         }).join('\n\n')
-      : 'Empty';
+      : 'Vacío';
 
     const selectedTeamId = useTeamStore.getState().selectedAgentSetId;
     const activeTeam = useTeamStore.getState().customSystems.find(s => s.id === selectedTeamId) 
@@ -45,20 +45,20 @@ export class PromptBuilder {
     let modelLimitInfo = '';
     if (activeTeam?.outputType === 'video') {
       if (activeTeam.outputModel?.includes('lite')) {
-        modelLimitInfo = ` Note: The current model (${activeTeam.outputModel}) supports only 1 reference image for animation.`;
+        modelLimitInfo = ` Nota: El modelo actual (${activeTeam.outputModel}) solo admite 1 imagen de referencia para la animación.`;
       } else {
-        modelLimitInfo = ` Note: The current model (${activeTeam.outputModel}) supports up to 3 reference images for style and content guidance.`;
+        modelLimitInfo = ` Nota: El modelo actual (${activeTeam.outputModel}) admite hasta 3 imágenes de referencia para guía de estilo y contenido.`;
       }
     }
 
     const imageInstruction = hasImages
-      ? `\n6. REFERENCE IMAGES: The user has provided ${referenceImages.length} reference image(s). You MUST use these as a visual guide for the project's style, mood, and content. Your team should analyze these to ensure the final ${activeTeam?.outputType} aligns with the inspiration.${modelLimitInfo}`
+      ? `\n6. IMÁGENES DE REFERENCIA: El usuario ha proporcionado ${referenceImages.length} imagen(es) de referencia. DEBES usarlas como guía visual para el estilo, el tono y el contenido del proyecto. Tu equipo debe analizarlas para asegurarse de que el ${activeTeam?.outputType} final se alinee con la inspiración.${modelLimitInfo}`
       : '';
 
-    const outputInstruction = activeTeam?.outputType !== 'text' 
-      ? `\n4. TEAM OUTPUT: ${activeTeam?.outputType?.toUpperCase()}. Your 'deliver_project' output MUST be a highly detailed PROMPT for a ${activeTeam?.outputType} generator model (${activeTeam?.outputModel}).
-CRITICAL: You MUST synthesize all subagent findings, research results, and any user feedback into this final prompt. DO NOT just repeat your initial brief.
-The generation model expects a SINGLE prompt to produce a SINGLE ${activeTeam?.outputType}. Be precise.`
+    const outputInstruction = activeTeam?.outputType !== 'text'
+      ? `\n4. SALIDA DEL EQUIPO: ${activeTeam?.outputType?.toUpperCase()}. Tu salida de 'deliver_project' DEBE ser un PROMPT muy detallado para un modelo generador de ${activeTeam?.outputType} (${activeTeam?.outputModel}).
+CRÍTICO: DEBES sintetizar todos los hallazgos de los subagentes, resultados de investigación y cualquier feedback del usuario en este prompt final. NO te limites a repetir el brief inicial.
+El modelo de generación espera UN ÚNICO prompt para producir UN ÚNICO ${activeTeam?.outputType}. Sé preciso.`
       : '';
 
     const pendingReviews = tasks.filter(t => t.assignedAgentId === agent.index && t.reviewComments);
@@ -66,17 +66,17 @@ The generation model expects a SINGLE prompt to produce a SINGLE ${activeTeam?.o
       ? `\nREVISION REQUESTED:\n${pendingReviews.map(t => `- [${t.title}] Feedback: ${t.reviewComments}`).join('\n')}`
       : '';
 
-    return `ID: ${agent.name}. Role: ${agent.description}. Phase: ${phase}.
+    return `ID: ${agent.name}. Rol: ${agent.description}. Fase: ${phase}.
 ${brief ? `Brief: ${brief}` : ''}${reviewContext}
-Team: User (0), ${team}
+Equipo: Usuario (0), ${team}
 KANBAN:
 ${board}
-RULES:
-1. MAX 30 WORDS for chat. Systemic outputs ('complete_task', 'deliver_project', and the task titles/descriptions you create) MUST be under 100 WORDS. NO conversational filler, intros, outros, or self-attribution ("I have done..."). Focus exclusively on core data and synthesis.
-2. Tools only in WORKING (except set_user_brief in IDLE).
-3. QUALITY: If your node has 'Human-in-the-loop' enabled, your 'complete_task' result will be reviewed by the user before completion. 
-4. NO META-TALK: Avoid "I have finished X", "Here is the result". Use the tool payload for content and Chat for conversation only.${outputInstruction}${imageInstruction}
-5. LANGUAGE: You MUST generate all systemic outputs (tasks, 'complete_task' results, and 'deliver_project' prompts) in the same language as the 'Brief' or the user's interaction. If the project description is in Spanish, EVERYTHING you generate must be in Spanish.
-Goal: ${objectives[phase as keyof typeof objectives] || ''}`;
+REGLAS:
+1. MÁX 30 PALABRAS en el chat. Las salidas sistémicas ('complete_task', 'deliver_project', y los títulos/descripciones de tareas que crees) deben tener MÁS DE 100 PALABRAS. SIN relleno conversacional, introducciones, cierres ni atribución propia ("He hecho..."). Céntrate exclusivamente en datos esenciales y síntesis.
+2. Herramientas solo en WORKING (excepto set_user_brief en IDLE).
+3. CALIDAD: Si tu nodo tiene 'Human-in-the-loop' activado, tu resultado de 'complete_task' será revisado por el usuario antes de completarse.
+4. SIN META-HABLA: Evita "He terminado X", "Aquí está el resultado". Usa el payload de la herramienta para el contenido y el Chat solo para conversación.${outputInstruction}${imageInstruction}
+5. IDIOMA: DEBES generar todas las salidas sistémicas (tareas, resultados de 'complete_task' y prompts de 'deliver_project') en el mismo idioma que el 'Brief' o la interacción del usuario. Si la descripción del proyecto está en español, TODO lo que generes debe estar en español.
+Objetivo: ${objectives[phase as keyof typeof objectives] || ''}`;
   }
 }

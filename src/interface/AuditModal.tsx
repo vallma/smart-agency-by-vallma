@@ -79,7 +79,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-sm font-black text-darkDelegation uppercase tracking-widest">{agent?.name}</span>
                 {!isViewMode && (
-                  <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ backgroundColor: USER_COLOR_LIGHT, color: USER_COLOR }}>Requires Review</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ backgroundColor: USER_COLOR_LIGHT, color: USER_COLOR }}>Requiere revisión</span>
                 )}
               </div>
               <h2 className="text-2xl font-semibold text-darkDelegation tracking-tight leading-tight">
@@ -88,7 +88,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
               {isViewMode && (
                 <div className="flex items-center gap-2 mt-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600">COMPLETED WORK</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600">TRABAJO COMPLETADO</span>
                 </div>
               )}
             </div>
@@ -113,7 +113,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
                   <div className="flex items-center gap-3">
                     <div className="w-1 h-4 bg-darkDelegation rounded-full" />
                     <h3 className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">
-                      {selectedRevisionIndex !== null ? `Revision V${selectedRevisionIndex + 1}` : (isViewMode ? 'Final Output' : 'Current Proposal')}
+                      {selectedRevisionIndex !== null ? `Revisión V${selectedRevisionIndex + 1}` : (isViewMode ? 'Resultado final' : 'Propuesta actual')}
                     </h3>
                   </div>
                   {selectedRevisionIndex !== null && (
@@ -121,7 +121,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
                       onClick={() => setSelectedRevisionIndex(null)}
                       className="text-[9px] font-black uppercase text-zinc-400 hover:text-darkDelegation transition-colors"
                     >
-                      Back to latest
+                      Volver a la última versión
                     </button>
                   )}
                 </div>
@@ -130,7 +130,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                       {selectedRevisionIndex !== null
                         ? task.revisions[selectedRevisionIndex].output
-                        : (isViewMode ? (task.output || task.draftOutput) : (task.draftOutput || 'No content produced.'))}
+                        : (isViewMode ? (task.output || task.draftOutput) : (task.draftOutput || 'Sin contenido generado.'))}
                     </ReactMarkdown>
                   </div>
                 </div>
@@ -143,8 +143,8 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
               <div className="w-56 shrink-0 flex flex-col pt-4 animate-in fade-in slide-in-from-right-4 duration-700">
                 <div className="flex items-center gap-2 mb-6" style={{ color: USER_COLOR }}>
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: USER_COLOR }} />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Version History</span>
-                  <InfoBubble text="View previous iterations of this task. You can see how the work evolved or revert to a stronger version." />
+                  <span className="text-[10px] font-black uppercase tracking-widest">Historial de versiones</span>
+                  <InfoBubble text="Consulta las iteraciones anteriores de esta tarea. Podéis ver cómo evolucionó el trabajo o volver a una versión anterior." />
                 </div>
                 <div className="space-y-2 overflow-y-auto pr-2 max-h-[60vh] [scrollbar-width:none]">
                   {task.revisions.map((rev, idx) => (
@@ -159,7 +159,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
                       `}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className={`text-[10px] font-black uppercase tracking-widest ${selectedRevisionIndex === idx ? 'text-zinc-400' : 'text-zinc-400'}`}>Version {idx + 1}</span>
+                        <span className={`text-[10px] font-black uppercase tracking-widest ${selectedRevisionIndex === idx ? 'text-zinc-400' : 'text-zinc-400'}`}>Versión {idx + 1}</span>
                         <span className="text-[9px] font-bold opacity-50 uppercase">{new Date(rev.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                       </div>
                       {rev.feedback && (
@@ -180,8 +180,8 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
                           : 'bg-white border-zinc-100 hover:border-emerald-200'}
                       `}
                     >
-                      <span className="text-[12px] font-black uppercase tracking-widest text-emerald-600">Active Review</span>
-                      <p className="text-[12px] text-emerald-400 font-medium leading-none">In review process...</p>
+                      <span className="text-[12px] font-black uppercase tracking-widest text-emerald-600">Revisión activa</span>
+                      <p className="text-[12px] text-emerald-400 font-medium leading-none">En proceso de revisión...</p>
                     </button>
                   )}
                 </div>
@@ -196,14 +196,14 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
             <div className="flex items-center gap-2 mb-2 text-zinc-400">
               <div className="flex items-center gap-2">
                 <GitPullRequest size={12} />
-                <span className="text-[9px] font-black uppercase tracking-widest">Your Feedback</span>
+                <span className="text-[9px] font-black uppercase tracking-widest">Tu comentario</span>
               </div>
-              <InfoBubble text="Provide specific instructions for what to change. The agent will read this and attempt a new version." />
+              <InfoBubble text="Proporciona instrucciones específicas sobre qué cambiar. El agente las leerá e intentará una nueva versión." />
             </div>
             <textarea
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              placeholder="Describe what needs to be changed before rejecting..."
+              placeholder="Describe qué necesita cambiarse antes de rechazar..."
               className="w-full bg-zinc-50 border border-zinc-100 rounded-xl p-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-darkDelegation/5 transition-all resize-none h-20 placeholder:text-zinc-300 placeholder:italic"
             />
           </div>
@@ -216,7 +216,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
               onClick={selectedRevisionIndex !== null ? () => setSelectedRevisionIndex(null) : onClose}
               className="h-12 px-10 bg-darkDelegation text-white rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all hover:bg-black active:scale-95 flex items-center gap-2 shadow-xl shadow-darkDelegation/10"
             >
-              {selectedRevisionIndex !== null ? 'Show Active Review' : 'Close Viewer'}
+              {selectedRevisionIndex !== null ? 'Ver revisión activa' : 'Cerrar visor'}
             </button>
           ) : (
             <>
@@ -231,7 +231,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
                 `}
               >
                 <AlertCircle size={14} strokeWidth={3} />
-                Reject with Feedback
+                Rechazar con comentario
               </button>
 
               <button
@@ -239,7 +239,7 @@ export const AuditModal: React.FC<AuditModalProps> = ({ taskId, isOpen, onClose,
                 className="h-12 px-10 bg-darkDelegation text-white rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all hover:bg-black active:scale-95 flex items-center gap-2 shadow-xl shadow-darkDelegation/10"
               >
                 <CheckCircle2 size={14} strokeWidth={3} />
-                Approve Task
+                Aprobar tarea
               </button>
             </>
           )}

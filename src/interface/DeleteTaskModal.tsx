@@ -34,10 +34,10 @@ const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({ isOpen, onClose, onCo
           </div>
 
           <h3 className="text-lg font-bold text-darkDelegation mb-1.5 leading-tight">
-            Delete Task?
+            ¿Eliminar tarea?
           </h3>
           <p className="text-[13px] text-zinc-500 leading-relaxed mb-6">
-            Are you sure you want to delete {taskTitle ? <span className="font-semibold text-zinc-700">"{taskTitle}"</span> : "this task"}? This action cannot be undone.
+            ¿Estás seguro de que quieres eliminar {taskTitle ? <span className="font-semibold text-zinc-700">"{taskTitle}"</span> : "esta tarea"}? Esta acción no se puede deshacer.
           </p>
 
           <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({ isOpen, onClose, onCo
               onClick={onClose}
               className="flex-1 py-2 text-sm font-bold text-zinc-500 hover:bg-zinc-50 rounded-xl transition-colors"
             >
-              Cancel
+              Cancelar
             </button>
             <button
               onClick={() => {
@@ -54,7 +54,7 @@ const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({ isOpen, onClose, onCo
               }}
               className="flex-1 py-2 text-sm font-bold text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors shadow-sm shadow-red-200"
             >
-              Delete Task
+              Eliminar tarea
             </button>
           </div>
         </div>

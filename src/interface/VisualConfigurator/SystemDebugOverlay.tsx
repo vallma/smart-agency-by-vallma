@@ -24,7 +24,7 @@ export const SystemDebugOverlay: React.FC<SystemDebugOverlayProps> = ({ system, 
         className="px-2 py-1 bg-red-50 text-red-500 rounded border border-red-100 text-[8px] font-black uppercase tracking-widest hover:bg-red-100 transition-colors flex items-center gap-1.5"
       >
         <Code size={10} />
-        Debug System
+        Debug del sistema
       </button>
 
       {isOpen && (
@@ -33,7 +33,7 @@ export const SystemDebugOverlay: React.FC<SystemDebugOverlayProps> = ({ system, 
             <div className="flex items-center gap-3">
               <Code size={14} className="text-zinc-400" />
               <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
-                System Debug Data — <span className="text-darkDelegation">{system.teamName || 'Untitled'}</span>
+                Datos de debug del sistema — <span className="text-darkDelegation">{system.teamName || 'Sin nombre'}</span>
               </h3>
             </div>
 
@@ -43,12 +43,12 @@ export const SystemDebugOverlay: React.FC<SystemDebugOverlayProps> = ({ system, 
                 className="flex items-center gap-1.5 px-2 py-1 bg-white border border-zinc-200 rounded-lg text-[9px] font-bold text-zinc-600 hover:bg-zinc-50 transition-all active:scale-95"
               >
                 {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
-                {copied ? 'Copied!' : 'Copy JSON'}
+                {copied ? '¡Copiado!' : 'Copiar JSON'}
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 px-2 hover:bg-zinc-200 rounded-lg text-zinc-400 hover:text-darkDelegation transition-colors"
-                title="Close overlay"
+                title="Cerrar panel"
               >
                 <X size={16} />
               </button>
@@ -61,7 +61,7 @@ export const SystemDebugOverlay: React.FC<SystemDebugOverlayProps> = ({ system, 
 
           <div className="p-3 bg-zinc-50 border-t border-zinc-100 flex justify-end">
             <p className="text-[8px] font-bold uppercase tracking-widest text-zinc-400 italic">
-              Provisional Debug Tool • Close with ESC or button
+              Herramienta de debug provisional • Cierra con ESC o el botón
             </p>
           </div>
         </div>

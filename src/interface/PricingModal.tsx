@@ -43,11 +43,11 @@ const PricingModal: React.FC<PricingModalProps> = ({ onClose }) => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 hover:bg-blue-100 border border-blue-100 hover:border-blue-200 rounded-full transition-all duration-200"
               >
-                <span className="text-[11px] font-black uppercase tracking-wider text-blue-600">Official Pricing Page</span>
+                <span className="text-[11px] font-black uppercase tracking-wider text-blue-600">Página de precios oficial</span>
                 <ExternalLink size={11} className="text-blue-500" />
               </a>
               <p className="text-zinc-500 text-xs font-medium leading-relaxed">
-                Official Google Gemini API pricing (March 2026).
+                Precios oficiales de la API de Google Gemini (marzo de 2026).
               </p>
             </div>
           </div>
@@ -57,7 +57,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ onClose }) => {
             <div className="space-y-10">
               {/* Reasoning Models */}
               <div className="space-y-6">
-                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500 px-1 border-l-2 border-blue-500 pl-3">Reasoning Models</h3>
+                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500 px-1 border-l-2 border-blue-500 pl-3">Modelos de razonamiento</h3>
                 <div className="space-y-3">
                   {reasoningModels.map(([model, pricing]) => {
                     const isDefault = model === DEFAULT_MODELS.text;
@@ -68,7 +68,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ onClose }) => {
                         {isDefault && (
                           <div className="absolute -top-2 left-4 flex items-center gap-1.5 px-2 py-0.5 bg-blue-600 text-white text-[8px] font-black uppercase rounded-full tracking-widest shadow-sm">
                             <Sparkles size={8} className="fill-white" />
-                            Default
+                            Por defecto
                           </div>
                         )}
                         <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -118,7 +118,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ onClose }) => {
                             {isDefault && (
                               <div className="absolute -top-2 left-4 flex items-center gap-1.5 px-2 py-0.5 bg-amber-500 text-white text-[8px] font-black uppercase rounded-full tracking-widest shadow-sm">
                                 <Sparkles size={8} className="fill-white" />
-                                Default
+                                Por defecto
                               </div>
                             )}
                             <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -176,7 +176,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ onClose }) => {
                             {isDefault && (
                               <div className={`absolute -top-2 left-4 flex items-center gap-1.5 px-2 py-0.5 ${colors.badge} text-white text-[8px] font-black uppercase rounded-full tracking-widest shadow-sm`}>
                                 <Sparkles size={8} className="fill-white" />
-                                Default
+                                Por defecto
                               </div>
                             )}
                             <div className="flex items-center gap-3 min-w-0 flex-1">

@@ -33,7 +33,7 @@ const InternalHeader = ({ onClose, system }: { onClose: () => void, system: any 
   <div className="h-14 border-b border-zinc-100 bg-white flex items-center justify-between px-6 z-50 shrink-0">
     <div className="flex items-center gap-2">
       <Settings size={18} className="text-darkDelegation" strokeWidth={2} />
-      <h2 className="text-xs font-black text-darkDelegation uppercase tracking-[0.2em] ml-2">Manage Teams</h2>
+      <h2 className="text-xs font-black text-darkDelegation uppercase tracking-[0.2em] ml-2">Gestionar equipos</h2>
 
       <div className="ml-4">
         <SystemDebugOverlay system={system} />
@@ -54,8 +54,8 @@ const InternalHeader = ({ onClose, system }: { onClose: () => void, system: any 
 const AgentPlaceholder = () => (
   <div className="w-80 flex flex-col items-center justify-center p-8 text-center text-zinc-400">
     <User size={32} strokeWidth={1.5} className="mb-4 opacity-20" />
-    <p className="text-[10px] uppercase font-bold tracking-widest">Select an agent</p>
-    <p className="text-[9px] mt-2 leading-relaxed italic opacity-60">Click on any node in the flow to view and edit its details.</p>
+    <p className="text-[10px] uppercase font-bold tracking-widest">Selecciona un agente</p>
+    <p className="text-[9px] mt-2 leading-relaxed italic opacity-60">Haz clic en cualquier nodo del flujo para ver y editar sus detalles.</p>
   </div>
 );
 
@@ -225,7 +225,7 @@ const VisualConfiguratorContent: React.FC = () => {
       id: newId,
       index: characters.length,
       name: `Specialist ${characters.length}`,
-      description: 'Collaborate with the team to achieve the project goals.',
+      description: 'Colaborar con el equipo para alcanzar los objetivos del proyecto.',
       color: '#A855F7',
       model: DEFAULT_MODELS.text,
       position: newPosition
@@ -307,10 +307,10 @@ const VisualConfiguratorContent: React.FC = () => {
                     }`}
                 >
                   <Plus size={16} strokeWidth={3} />
-                  Add Subagent to {characters.find(a => a.id === (selectedAgentId && selectedAgentId !== 'user' ? selectedAgentId : system.leadAgent.id))?.name || 'Lead'}
+                  Añadir subagente a {characters.find(a => a.id === (selectedAgentId && selectedAgentId !== 'user' ? selectedAgentId : system.leadAgent.id))?.name || 'Principal'}
                 </button>
                 <p className="text-[10px] text-zinc-400 font-bold tracking-widest">
-                  Maximum {MAX_AGENTS} agents allowed
+                  Máximo {MAX_AGENTS} agentes permitidos
                 </p>
               </div>
             )}

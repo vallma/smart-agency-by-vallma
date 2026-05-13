@@ -29,8 +29,8 @@ export const TeamOutputBadge: React.FC<TeamOutputBadgeProps> = ({ system, classN
         {system.outputAutoApprove !== undefined && (
           <InfoTooltip
             text={system.outputAutoApprove
-              ? 'Output will be generated and delivered automatically'
-              : 'Output requires your manual review and approval before generation'}
+              ? 'El resultado se generará y entregará automáticamente'
+              : 'El resultado requiere tu revisión y aprobación manual antes de la generación'}
           >
             <div className="flex items-center gap-1.5">
               <div 
@@ -41,7 +41,7 @@ export const TeamOutputBadge: React.FC<TeamOutputBadgeProps> = ({ system, classN
                 }} 
               />
               <span className="text-[7px] font-bold text-zinc-300 uppercase tracking-tighter leading-none whitespace-nowrap">
-                {system.outputAutoApprove ? 'AUTO APPROVE' : 'MANUAL REVIEW'}
+                {system.outputAutoApprove ? 'APROBACIÓN AUTO.' : 'REVISIÓN MANUAL'}
               </span>
             </div>
           </InfoTooltip>
@@ -52,7 +52,7 @@ export const TeamOutputBadge: React.FC<TeamOutputBadgeProps> = ({ system, classN
 
       {/* Right Column: Model Name */}
       <div className="flex flex-col gap-0.5 flex-1 min-w-0 pl-1">
-        <span className="text-[7px] font-black text-zinc-300 uppercase tracking-widest leading-none">GENERATION MODEL</span>
+        <span className="text-[7px] font-black text-zinc-300 uppercase tracking-widest leading-none">MODELO DE GENERACIÓN</span>
         <span className="text-[10px] font-bold text-zinc-600 font-mono lowercase leading-tight">
           {system.outputModel}
         </span>

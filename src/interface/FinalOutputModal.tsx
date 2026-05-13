@@ -51,7 +51,7 @@ export function FinalOutputModal() {
       return (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
           <Loader2 className="animate-spin text-zinc-300" size={40} strokeWidth={1.5} />
-          <p className="text-zinc-400 font-black uppercase tracking-widest text-[10px]">Generating {finalAssetType} asset...</p>
+          <p className="text-zinc-400 font-black uppercase tracking-widest text-[10px]">Generando {finalAssetType}...</p>
         </div>
       );
     }
@@ -70,20 +70,20 @@ export function FinalOutputModal() {
           <div className="relative group">
             <img
               src={`data:image/png;base64,${finalAssetContent}`}
-              alt="Final Generated Asset"
+              alt="Resultado final generado"
               className="w-full rounded-2xl shadow-xl border border-black/5"
             />
             <button
               onClick={handleDownload}
               className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-black/5 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white text-zinc-600 active:scale-95"
-              title="Download Image"
+              title="Descargar imagen"
             >
               <Download size={18} />
             </button>
           </div>
           <div className="p-4 bg-zinc-100/50 rounded-xl border border-zinc-100/50">
-            <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">PROMPT USED:</p>
-            <p className="text-xs text-zinc-600 italic leading-relaxed">{finalOutput || "No prompt metadata available."}</p>
+            <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">PROMPT UTILIZADO:</p>
+            <p className="text-xs text-zinc-600 italic leading-relaxed">{finalOutput || "No hay metadatos de prompt disponibles."}</p>
           </div>
         </div>
       );
@@ -95,19 +95,19 @@ export function FinalOutputModal() {
           <div className="flex flex-col sm:flex-row items-center gap-3 p-3 bg-white border border-zinc-100 rounded-2xl shadow-sm">
             <audio controls className="flex-1 h-9">
               <source src={`data:audio/mp3;base64,${finalAssetContent}`} type="audio/mp3" />
-              Your browser does not support the audio element.
+              Tu navegador no admite el elemento de audio.
             </audio>
             <button
               onClick={handleDownload}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-darkDelegation text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all active:scale-95 shrink-0"
             >
               <Download size={14} strokeWidth={2.5} />
-              Download Audio
+              Descargar audio
             </button>
           </div>
           <div className="p-4 bg-zinc-100/50 rounded-xl border border-zinc-100/50">
-            <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">LYRICS / PROMPT:</p>
-            <p className="text-xs text-zinc-500 italic leading-relaxed">{finalOutput || "No prompt metadata available."}</p>
+            <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">LETRA / PROMPT:</p>
+            <p className="text-xs text-zinc-500 italic leading-relaxed">{finalOutput || "No hay metadatos de prompt disponibles."}</p>
           </div>
         </div>
       );
@@ -119,19 +119,19 @@ export function FinalOutputModal() {
           <div className="relative group">
             <video controls className="w-full rounded-2xl shadow-xl border border-black/5">
               <source src={finalAssetContent} type="video/mp4" />
-              Your browser does not support the video tag.
+              Tu navegador no admite el elemento de vídeo.
             </video>
             <button
               onClick={handleDownload}
               className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-black/5 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white text-zinc-600 active:scale-95 z-10"
-              title="Download Video"
+              title="Descargar vídeo"
             >
               <Download size={18} />
             </button>
           </div>
           <div className="p-4 bg-zinc-100/50 rounded-xl border border-zinc-100/50">
-            <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">SCRIPT / PROMPT:</p>
-            <p className="text-xs text-zinc-600 italic leading-relaxed">{finalOutput || "No prompt metadata available."}</p>
+            <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400 mb-1">GUIÓN / PROMPT:</p>
+            <p className="text-xs text-zinc-600 italic leading-relaxed">{finalOutput || "No hay metadatos de prompt disponibles."}</p>
           </div>
         </div>
       );
@@ -159,10 +159,10 @@ export function FinalOutputModal() {
                     {(activeTeam?.outputType || finalAssetType).toUpperCase()}
                   </span>
                 )}
-                Final {finalAssetType} Deliverable
+                Entregable final de {finalAssetType}
               </h2>
               <p className="text-[11px] text-zinc-400 mt-0.5">
-                Refined and generated by your autonomous team
+                Refinado y generado por vuestro equipo autónomo
               </p>
             </div>
             <TeamOutputBadge system={activeTeam} className="hidden sm:flex" />
@@ -186,7 +186,7 @@ export function FinalOutputModal() {
         <div className="px-8 py-6 border-t border-black/5 flex flex-col gap-6 bg-white">
           {referenceImages.length > 0 && (
             <div className="space-y-3">
-              <p className="text-[9px] font-black uppercase tracking-widest text-zinc-300">Visual Inspiration</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-zinc-300">Inspiración visual</p>
               <div className="flex gap-2">
                 {referenceImages.map((img, idx) => (
                   <div key={idx} className="w-12 h-12 rounded-lg overflow-hidden border border-black/5 bg-zinc-50 shadow-sm">
@@ -205,7 +205,7 @@ export function FinalOutputModal() {
               onClick={handleCopy}
               className="px-6 py-3 bg-darkDelegation text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.15em] hover:bg-black active:scale-[0.98] transition-all shadow-lg shadow-black/10"
             >
-              {copied ? 'Copied!' : `Copy ${finalAssetType === 'text' ? 'Output' : 'Prompt'}`}
+              {copied ? '¡Copiado!' : `Copiar ${finalAssetType === 'text' ? 'resultado' : 'prompt'}`}
             </button>
           </div>
         </div>

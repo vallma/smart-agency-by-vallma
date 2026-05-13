@@ -26,9 +26,9 @@ export const TeamsPanel: React.FC<TeamsPanelProps> = ({ onSelectTeam, selectedTe
     const newId = `team-${Date.now()}`;
     const newSystem: AgenticSystem = {
       id: newId,
-      teamName: 'New Team',
-      teamType: 'Custom',
-      teamDescription: 'A custom agentic team.',
+      teamName: 'Nuevo equipo',
+      teamType: 'Personalizado',
+      teamDescription: 'Un equipo agéntico personalizado.',
       color: '#A855F7',
       outputType: 'text',
       outputModel: DEFAULT_MODELS.text,
@@ -41,7 +41,7 @@ export const TeamsPanel: React.FC<TeamsPanelProps> = ({ onSelectTeam, selectedTe
         id: `agent-${Date.now()}`,
         index: 1,
         name: 'Lead Agent',
-        description: 'Coordinate the team to finish the project.',
+        description: 'Coordinar al equipo para finalizar el proyecto.',
         color: '#A855F7',
         model: DEFAULT_MODELS.text,
         position: { x: 0, y: 150 },
@@ -81,7 +81,7 @@ export const TeamsPanel: React.FC<TeamsPanelProps> = ({ onSelectTeam, selectedTe
           className="w-full flex items-center justify-center gap-2 py-3 bg-darkDelegation hover:bg-darkDelegation text-white rounded-xl text-[10px] font-black uppercase tracking-[0.1em] transition-all shadow-lg shadow-black/5 active:scale-[0.98]"
         >
           <Plus size={14} strokeWidth={3} />
-          Create New Team
+          Crear nuevo equipo
         </button>
       </div>
     </div>

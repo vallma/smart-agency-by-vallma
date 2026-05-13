@@ -34,15 +34,15 @@ const InfoModal: React.FC<InfoModalProps> = ({ onClose }) => {
           </div>
 
           <h2 className="text-3xl font-black text-darkDelegation leading-[1.2] mb-6 tracking-tight text-center">
-            A no-code 3D playground to explore Agentic AI systems
+            Un entorno 3D sin código para explorar sistemas de IA agéntica
           </h2>
 
           <div className="space-y-6 text-zinc-500 text-[15px] leading-relaxed text-center sm:text-left">
             <p>
-              Smart Agency by Vallma is an experimental workspace where you stop prompting and start delegating to a team of autonomous AI agents in a living 3D office.
+              Smart Agency by Vallma es un espacio de trabajo experimental donde dejáis de hacer prompts y empezáis a delegar en un equipo de agentes de IA autónomos en una oficina 3D en vivo.
             </p>
             <p>
-              Designed for enthusiasts, educators, and creative developers to understand multi-agent collaboration, making complex AI processes transparent, collaborative, and human-centered.
+              Diseñado para entusiastas, educadores y desarrolladores creativos para entender la colaboración multiagente, haciendo los procesos de IA complejos transparentes, colaborativos y centrados en las personas.
             </p>
           </div>
 
