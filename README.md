@@ -1,20 +1,20 @@
 <p align="center">
-  <img src="public/images/the-delegation.svg" width="256" alt="The Delegation Logo">
+  <img src="public/images/the-delegation.svg" width="256" alt="Smart Agency by Vallma Logo">
 </p>
 
 <p align="center">
-  <a href="https://arturitu.github.io/the-delegation/"><b>Launch The Delegation · Full Experience *</b></a>
+  <b>Launch Smart Agency by Vallma · Full Experience *</b>
 </p>
 
 > [!IMPORTANT]
 > **\*** This experience requires **BYOK (Bring Your Own Key)**. You will need a **[Gemini API key](https://aistudio.google.com/app/apikey)** to run the simulation. Deep integration enables native support for text, and multimodal generation (**Nano Banana**, **Lyria 3**, **Veo 3.1**). You can also **clone or fork** this repository to run it locally.
 <div align="center">
-  <img src="public/images/the-delegation-UI.jpg" width="100%" alt="The Delegation Hero">
+  <img src="public/images/the-delegation-UI.jpg" width="100%" alt="Smart Agency by Vallma Hero">
 </div>
 
 <br/>
 
-## What is The Delegation?
+## What is Smart Agency by Vallma?
 
 # A no-code 3D playground to explore, design, and interact with Agentic AI systems
 
@@ -34,7 +34,7 @@ npm install
 npm run dev
 ```
 
-3. **Open the app:** Navigate to the local URL shown in your terminal (usually `http://localhost:3000/the-delegation`).
+3. **Open the app:** Navigate to the local URL shown in your terminal (usually `http://localhost:3000/smart-agency-by-vallma`).
 
 ## Features
 
@@ -86,7 +86,7 @@ npm run dev
     - [ ] **Inter-Agent Knowledge Sharing:** Long-term memory for agent teams across projects.
 - **Refinement**
     - [ ] **Architecture Decoupling:** Further separation of core logic from the simulation environment.
-    - [ ] **UX/UI Overhaul:** Unified CSS styling based on "The Delegation" brand identity.
+    - [ ] **UX/UI Overhaul:** Unified CSS styling based on "Smart Agency by Vallma" brand identity.
 
 ## Developer Note
 
@@ -97,6 +97,4 @@ This release (**v0.2.0**) was developed entirely using **Google Antigravity** as
 This project follows a dual-licensing model:
 
 - **Source Code (MIT):** All logic, shaders, and UI code are free to use, modify, and distribute.
-- **3D Models & Assets (CC BY-NC 4.0):** The custom 3D office and character models are Copyright © 2026 **Arturo Paracuellos ([unboring.net](https://unboring.net))**. They are free for personal and educational use but _cannot_ be used for commercial purposes without permission.
-
-Developed with ❤️ by [Arturo Paracuellos](https://unboring.net)
+- **3D Models & Assets (CC BY-NC 4.0):** The custom 3D office and character models are free for personal and educational use but _cannot_ be used for commercial purposes without permission.

@@ -38,8 +38,8 @@ export interface AgenticSystem {
 
 export const AGENTIC_SETS: AgenticSystem[] = [
   {
-    id: 'unboring-net',
-    teamName: 'unboring.net',
+    id: 'creative-agency',
+    teamName: 'Creative Agency',
     teamType: 'Agency',
     teamDescription: 'A full-service creative agency covering branding, design, development and go-to-market strategy.',
     color: '#4285F4',
