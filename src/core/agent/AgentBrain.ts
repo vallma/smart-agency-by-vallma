@@ -42,7 +42,7 @@ export class AgentBrain {
       const llmConfig = useUiStore.getState().llmConfig;
       const agentProvider = (this.host.data.provider || 'gemini') as ProviderName;
       const apiKey = llmConfig.apiKeys?.[agentProvider] || '';
-      if (!apiKey) throw new Error(`API key for ${agentProvider} is required`);
+      if (!apiKey && agentProvider !== 'ollama') throw new Error(`API key for ${agentProvider} is required`);
       const provider = createProvider(agentProvider, apiKey);
       const model = this.host.data.model || llmConfig.model;
       const teamId = useTeamStore.getState().selectedAgentSetId;

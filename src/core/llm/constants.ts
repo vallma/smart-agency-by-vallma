@@ -5,7 +5,7 @@ export const DEFAULT_MODELS = {
   video: 'veo-3.1-lite-generate-preview'
 } as const;
 
-export const PROVIDERS = ['gemini', 'claude', 'openai', 'perplexity'] as const;
+export const PROVIDERS = ['gemini', 'claude', 'openai', 'perplexity', 'ollama'] as const;
 export type ProviderName = typeof PROVIDERS[number];
 
 export const PROVIDER_LABELS: Record<ProviderName, string> = {
@@ -13,6 +13,7 @@ export const PROVIDER_LABELS: Record<ProviderName, string> = {
   claude: 'Claude',
   openai: 'OpenAI',
   perplexity: 'Perplexity',
+  ollama: 'Ollama',
 };
 
 export const PROVIDER_MODELS: Record<ProviderName, string[]> = {
@@ -36,7 +37,17 @@ export const PROVIDER_MODELS: Record<ProviderName, string[]> = {
     'sonar',
     'sonar-reasoning-pro',
   ],
+  ollama: [
+    'llama3.2',
+    'llama3.1',
+    'mistral',
+    'qwen2.5',
+    'phi3',
+    'gemma3',
+  ],
 };
+
+export const OLLAMA_BASE_URL = 'http://localhost:11434/v1';
 
 export const AVAILABLE_MODELS = {
   text: [

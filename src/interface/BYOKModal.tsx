@@ -9,12 +9,14 @@ interface BYOKModalProps {
 
 const STORAGE_KEY = 'byok-config';
 
-const PROVIDER_LINKS: Record<ProviderName, string> = {
+const PROVIDER_LINKS: Partial<Record<ProviderName, string>> = {
   gemini: 'https://aistudio.google.com/app/apikey',
   claude: 'https://console.anthropic.com/settings/keys',
   openai: 'https://platform.openai.com/api-keys',
   perplexity: 'https://www.perplexity.ai/settings/api',
 };
+
+const OLLAMA_PROVIDER = 'ollama';
 
 const BYOKModal: React.FC<BYOKModalProps> = ({ onClose }) => {
   const { llmConfig, setLlmConfig, byokError } = useUiStore();
@@ -139,46 +141,72 @@ const BYOKModal: React.FC<BYOKModalProps> = ({ onClose }) => {
             ))}
           </div>
 
-          {/* Get API key link */}
-          <div className="mb-4">
-            <a
-              href={PROVIDER_LINKS[activeProvider]}
-              target="_blank"
-              rel="noopener"
-              className="group inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 hover:border-emerald-200 rounded-full transition-all duration-200"
-            >
-              <span className="text-[10px] font-black uppercase tracking-wider text-emerald-600">
-                Obtener clave API de {PROVIDER_LABELS[activeProvider]}
-              </span>
-              <svg className="text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
-          </div>
-
-          {/* API Key input */}
-          <div className="mb-10">
-            <label className="block text-[11px] font-black uppercase tracking-[0.2em] text-zinc-300 mb-4 ml-1">
-              {PROVIDER_LABELS[activeProvider]} API Key
-            </label>
-            <div className="relative group">
-              <input
-                type={showKey ? 'text' : 'password'}
-                value={currentKey}
-                onChange={(e) => handleKeyChange(e.target.value)}
-                placeholder="Pega tu clave API aquí"
-                className="w-full bg-zinc-50 border border-zinc-100 rounded-3xl px-6 py-4 pr-14 text-sm text-darkDelegation font-mono placeholder:text-zinc-300 placeholder:font-sans focus:outline-none focus:border-zinc-200 transition-all shadow-sm group-hover:shadow-md"
-              />
-              <button
-                type="button"
-                onClick={() => setShowKey(v => !v)}
-                className="absolute right-5 top-1/2 -translate-y-1/2 text-zinc-200 hover:text-zinc-400 transition-colors cursor-pointer"
-              >
-                {showKey ? <EyeOff size={20} strokeWidth={2.5} /> : <Eye size={20} strokeWidth={2.5} />}
-              </button>
+          {/* Ollama: instrucciones / otros: link + input */}
+          {activeProvider === OLLAMA_PROVIDER ? (
+            <div className="mb-10 p-5 bg-zinc-50 border border-zinc-100 rounded-3xl space-y-3">
+              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Gratis · Sin API key</p>
+              <p className="text-xs text-zinc-500 font-medium leading-relaxed">
+                Ollama corre modelos localmente en tu ordenador. No necesita clave API ni conexión a internet.
+              </p>
+              <div className="space-y-1.5 pt-1">
+                <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">Instalación</p>
+                {[
+                  'brew install ollama',
+                  'ollama pull llama3.2',
+                  'OLLAMA_ORIGINS="*" ollama serve',
+                ].map(cmd => (
+                  <code key={cmd} className="block text-[11px] font-mono bg-zinc-200 text-zinc-700 px-3 py-1.5 rounded-xl">
+                    {cmd}
+                  </code>
+                ))}
+              </div>
+              <p className="text-[10px] text-zinc-400 leading-relaxed">
+                Una vez corriendo en <span className="font-mono">localhost:11434</span>, seleccioná Ollama como provider en cada agente.
+              </p>
             </div>
-          </div>
+          ) : (
+            <>
+              <div className="mb-4">
+                {PROVIDER_LINKS[activeProvider] && (
+                  <a
+                    href={PROVIDER_LINKS[activeProvider]}
+                    target="_blank"
+                    rel="noopener"
+                    className="group inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 hover:border-emerald-200 rounded-full transition-all duration-200"
+                  >
+                    <span className="text-[10px] font-black uppercase tracking-wider text-emerald-600">
+                      Obtener clave API de {PROVIDER_LABELS[activeProvider]}
+                    </span>
+                    <svg className="text-emerald-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </a>
+                )}
+              </div>
+              <div className="mb-10">
+                <label className="block text-[11px] font-black uppercase tracking-[0.2em] text-zinc-300 mb-4 ml-1">
+                  {PROVIDER_LABELS[activeProvider]} API Key
+                </label>
+                <div className="relative group">
+                  <input
+                    type={showKey ? 'text' : 'password'}
+                    value={currentKey}
+                    onChange={(e) => handleKeyChange(e.target.value)}
+                    placeholder="Pega tu clave API aquí"
+                    className="w-full bg-zinc-50 border border-zinc-100 rounded-3xl px-6 py-4 pr-14 text-sm text-darkDelegation font-mono placeholder:text-zinc-300 placeholder:font-sans focus:outline-none focus:border-zinc-200 transition-all shadow-sm group-hover:shadow-md"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowKey(v => !v)}
+                    className="absolute right-5 top-1/2 -translate-y-1/2 text-zinc-200 hover:text-zinc-400 transition-colors cursor-pointer"
+                  >
+                    {showKey ? <EyeOff size={20} strokeWidth={2.5} /> : <Eye size={20} strokeWidth={2.5} />}
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
 
           {/* Actions */}
           <div className="flex items-center justify-between">
@@ -195,7 +223,7 @@ const BYOKModal: React.FC<BYOKModalProps> = ({ onClose }) => {
 
             <button
               onClick={handleSave}
-              disabled={!Object.values(apiKeys).some(k => k.trim())}
+              disabled={activeProvider !== OLLAMA_PROVIDER && !Object.values(apiKeys).some(k => k.trim())}
               className="px-12 py-4 bg-darkDelegation text-white rounded-[24px] text-xs font-black uppercase tracking-[0.2em] hover:bg-black transition-all active:scale-95 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:active:scale-100 shadow-xl shadow-black/10"
             >
               Guardar

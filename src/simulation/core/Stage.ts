@@ -13,6 +13,7 @@ export class Stage {
   constructor(rendererElement: HTMLElement) {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(SCENE_BACKGROUND_COLOR);
+    this.scene.fog = new THREE.FogExp2(SCENE_BACKGROUND_COLOR, 0.045);
 
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500);
     this.camera.position.set(10, 8, 15);
@@ -42,24 +43,36 @@ export class Stage {
   }
 
   private setupLights() {
-    // Keep ambient low so directional shadows have visible contrast
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1 * Math.PI);
+    // Luz ambiental cálida — simula reflexión difusa de paredes de oficina
+    const ambientLight = new THREE.AmbientLight(0xFFF5E4, 1.8);
     this.scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5 * Math.PI);
-    dirLight.position.set(10, 20, 10);
-    dirLight.castShadow = true;
-    dirLight.shadow.camera.near = 0.1;
-    dirLight.shadow.camera.far = 100;
-    dirLight.shadow.camera.top = 10;
-    dirLight.shadow.camera.bottom = -10;
-    dirLight.shadow.camera.right = 10;
-    dirLight.shadow.camera.left = -10;
-    dirLight.shadow.mapSize.set(2048, 2048);
-    dirLight.shadow.bias = -0.0001;
-    dirLight.shadow.radius = 2;
-    dirLight.shadow.autoUpdate = true;
-    this.scene.add(dirLight);
+    // Luz de techo principal — fluorescente de oficina, levemente azulada
+    const ceilingLight = new THREE.DirectionalLight(0xEEF4FF, 1.2);
+    ceilingLight.position.set(0, 20, 0);
+    ceilingLight.castShadow = true;
+    ceilingLight.shadow.camera.near = 0.1;
+    ceilingLight.shadow.camera.far = 100;
+    ceilingLight.shadow.camera.top = 12;
+    ceilingLight.shadow.camera.bottom = -12;
+    ceilingLight.shadow.camera.right = 12;
+    ceilingLight.shadow.camera.left = -12;
+    ceilingLight.shadow.mapSize.set(2048, 2048);
+    ceilingLight.shadow.bias = -0.0001;
+    ceilingLight.shadow.radius = 3;
+    ceilingLight.shadow.autoUpdate = true;
+    this.scene.add(ceilingLight);
+
+    // Luz de ventana lateral — sol de tarde, naranja suave
+    const windowLight = new THREE.DirectionalLight(0xFFD9A0, 0.6);
+    windowLight.position.set(-15, 10, 5);
+    windowLight.castShadow = false;
+    this.scene.add(windowLight);
+
+    // Relleno trasero suave — evita sombras totalmente negras
+    const fillLight = new THREE.DirectionalLight(0xC8D8FF, 0.3);
+    fillLight.position.set(5, 5, -10);
+    this.scene.add(fillLight);
   }
 
   public onResize(width: number, height: number) {

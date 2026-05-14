@@ -1,7 +1,7 @@
 import { Edit2, Pipette, Trash2, Users, X } from 'lucide-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AgenticSystem, DEFAULT_AGENTIC_SET_ID, getAllAgents } from '../../data/agents';
-import { DEFAULT_MODELS, AVAILABLE_MODELS, ModelType } from '../../core/llm/constants';
+import { DEFAULT_MODELS, AVAILABLE_MODELS, ModelType, PROVIDER_MODELS } from '../../core/llm/constants';
 import { USER_COLOR } from '../../theme/brand';
 import { useTeamStore } from '../../integration/store/teamStore';
 import { useSceneManager } from '../../simulation/SceneContext';
@@ -286,9 +286,19 @@ export const TeamCard: React.FC<TeamCardProps> = ({
                     onChange={(e) => setLocalEditData(prev => ({ ...prev, outputModel: e.target.value }))}
                     className="w-full bg-white border border-zinc-100 text-[10px] font-bold rounded-xl px-2.5 py-1.5 outline-none cursor-pointer lowercase"
                   >
-                    {(AVAILABLE_MODELS[localEditData.outputType as ModelType] || []).map(model => (
-                      <option key={model} value={model}>{model}</option>
-                    ))}
+                    {localEditData.outputType === 'text' ? (
+                      <>
+                        <optgroup label="Gemini">{AVAILABLE_MODELS.text.map(m => <option key={m} value={m}>{m}</option>)}</optgroup>
+                        <optgroup label="Claude">{PROVIDER_MODELS.claude.map(m => <option key={m} value={m}>{m}</option>)}</optgroup>
+                        <optgroup label="OpenAI">{PROVIDER_MODELS.openai.map(m => <option key={m} value={m}>{m}</option>)}</optgroup>
+                        <optgroup label="Perplexity">{PROVIDER_MODELS.perplexity.map(m => <option key={m} value={m}>{m}</option>)}</optgroup>
+                        <optgroup label="Ollama">{PROVIDER_MODELS.ollama.map(m => <option key={m} value={m}>{m}</option>)}</optgroup>
+                      </>
+                    ) : (
+                      (AVAILABLE_MODELS[localEditData.outputType as ModelType] || []).map(model => (
+                        <option key={model} value={model}>{model}</option>
+                      ))
+                    )}
                   </select>
                 </div>
               </div>
